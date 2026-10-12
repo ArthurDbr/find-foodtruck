@@ -28,8 +28,8 @@ DEMO = [
 def main() -> None:
     Base.metadata.create_all(engine)
     with SessionLocal() as db:
-        if db.scalar(select(User).where(User.email == "demo@foodtruck.dev")):
-            print("Demo data already present.")
+        if db.scalar(select(User).limit(1)):
+            print("Database not empty, skipping demo data.")
             return
         user = User(email="demo@foodtruck.dev", password_hash=hash_password("demo1234"))
         db.add(user)

@@ -1,0 +1,16 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: find-foodtruck
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SEED_DEMO
+        value: "1"
+      # Optional: paste a free Neon Postgres URL to keep data across restarts.
+      # Without it, SQLite is used and data resets whenever the service restarts.
+      - key: DATABASE_URL
+        sync: false
